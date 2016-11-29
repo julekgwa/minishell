@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/types.h>
+       #include <sys/stat.h>
+       #include <unistd.h>
 
 char	**getpath(char **envp)
 {
@@ -69,8 +72,13 @@ char	*ft_more(char **envp, char **split)
 
 void	ft_execute_bin(char **command, char **envp)
 {
-	pid_t	pid;
+	pid_t		pid;
+	struct stat	sb;
 
+	if (!(stat(command[0], &sb) == 0 && sb.st_mode & S_IXUSR ? 1 : 0)) {
+		ft_putendl("Not executable bin");
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 		execve(command[0], &command[0], envp);
@@ -81,10 +89,19 @@ void	ft_execute_bin(char **command, char **envp)
 void	ft_execute(char **envp, char **sp)
 {
 	pid_t	pid;
+	int		exec;
+	// struct stat	sb;
 
+	if ((access(sp[0], X_OK) == 0)) {
+		ft_putendl("Not executable exec");
+		return ;
+	}
 	pid = fork();
-	if (pid == 0)
-		execve(ft_more(envp, sp), &sp[0], envp);
+	if (pid == 0) {
+		exec = execve(ft_more(envp, sp), &sp[0], envp);
+		if (exec == -1)
+			ft_putendl("Not executable");
+	}
 	if (pid > 0)
 		wait(NULL);
 }

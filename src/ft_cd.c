@@ -105,6 +105,6 @@ void	ft_cd(char **directory, char **envp)
 			ft_putendl(dir);
 			return ;
 		}
-		ft_modpwd(dirflag, oldpwd, envp);
 	}
+	ft_modpwd(dirflag, oldpwd, envp);
 }
