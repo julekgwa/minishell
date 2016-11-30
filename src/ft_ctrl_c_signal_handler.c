@@ -68,3 +68,22 @@ void	ft_multi_com(char *get_line, char **envp)
 	if (split_com)
 		freecopy(split_com);
 }
+
+char	**envp_cpy(char **envp)
+{
+	char	**copy;
+	int	i;
+
+	i = 0;
+	copy = (char **) malloc((ft_array_len(envp) + 1) * sizeof (char *));
+	copy[ft_array_len(envp)] = NULL;
+	if (copy)
+	{
+		while (envp[i])
+		{
+			copy[i] = ft_strdup(envp[i]);
+			i++;
+		}
+	}
+	return (copy);
+}

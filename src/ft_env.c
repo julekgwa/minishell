@@ -14,10 +14,8 @@
 
 int		ft_putenv(char *str, char **envp)
 {
-	// char	**r;
 	int		i;
 
-	// r = envp;
 	i = 0;
 	while (envp[i])
 	{
@@ -28,10 +26,8 @@ int		ft_putenv(char *str, char **envp)
 	{
 		envp[i] = ft_strdup(str);
 		envp[++i] = 0;
-		// free(str);
 		return (1);
 	}
-	// free(str);
 	return (0);
 }
 

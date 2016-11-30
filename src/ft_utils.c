@@ -68,5 +68,4 @@ void	ft_check_env(char ***command, char **envp)
 		i++;
 	}
 	*command = cmd;
-	// return (cmd);
 }

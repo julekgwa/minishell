@@ -12,9 +12,10 @@
 
 NAME = minishell
 SRC = ./src/main.c ./src/ft_commands.c ./src/ft_ctrl_c_signal_handler.c \
-	./src/ft_cd.c ./src/ft_echo.c ./src/ft_env.c ./src/ft_utils.c ./src/ft_get_data.c
+	./src/ft_cd.c ./src/ft_echo.c ./src/ft_env.c ./src/ft_utils.c \
+	./src/ft_get_data.c ./src/ft_cmd_utils.c
 OBJECT = main.o ft_commands.o ft_ctrl_c_signal_handler.o ft_cd.o ft_echo.o \
-	ft_env.o ft_utils.o ft_get_data.o
+	ft_env.o ft_utils.o ft_get_data.o ft_cmd_utils.o
 FLAGS = -Wall -Wextra -Werror -g3
 OPTIONS = -c -I libft/includes/ -I includes/
 
