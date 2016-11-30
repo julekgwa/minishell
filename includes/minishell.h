@@ -58,6 +58,7 @@ void	ft_execute_commands(char **command, char *get_line, char **envp);
 void	shl_loop(char *get_line, char **envp);
 int		ft_spaces_tabs(char *s);
 void	prompt(char **commands);
+void	ft_free_str(char *str, char *join);
 void	ft_builtins(char **user_comm, char *get_line, char **envp, char **sp);
 void	ft_exit(char **cmd, char *get_line);
 

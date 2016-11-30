@@ -58,10 +58,7 @@ char	*ft_clean_str(char *s)
 		while (s[i])
 		{
 			if (s[i] == ' ')
-			{
-				clean[j] = '\\';
-				j++;
-			}
+                          clean[j++] = '\\';
 			clean[j] = s[i];
 			i++;
 			j++;
@@ -86,8 +83,8 @@ void	ft_cd(char **directory, char **envp)
 	char	*oldpwd;
 	int		dirflag;
 
-	oldpwd = NULL;
 	dirflag = 0;
+	oldpwd = NULL;
 	oldpwd = getcwd(oldpwd, 1024);
 	dir = directory[1];
 	if (dir == NULL || ft_strequ(dir, "~"))
@@ -100,9 +97,7 @@ void	ft_cd(char **directory, char **envp)
 		dir = ft_remove_qoutes(dir);
 		if ((dirflag = chdir(dir) == -1))
 		{
-			ft_putstr("cd: ");
-			ft_putstr("no such file or directory: ");
-			ft_putendl(dir);
+			ft_print_error(dir, 3);
 			return ;
 		}
 	}

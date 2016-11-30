@@ -50,6 +50,8 @@ char	*ft_more(char **envp, char **split)
 
 	i = 0;
 	new = getpath(envp);
+	if (new == NULL)
+		return (NULL);
 	while (new[i] != '\0')
 	{
 		join = ft_strjoin(new[i], "/");
@@ -60,8 +62,7 @@ char	*ft_more(char **envp, char **split)
 			return (str);
 		}
 		i++;
-		free(str);
-		free(join);
+		ft_free_str(str, join);
 	}
 	freecopy(new);
 	return (NULL);

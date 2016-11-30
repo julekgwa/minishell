@@ -29,7 +29,7 @@ void	shl_loop(char *get_line, char **envp)
 				free(get_line);
 				exit(0);
 			}
-			if (ft_contains(get_line, ';'))
+			if (ft_contains(get_line, ';') && ft_strlen(get_line) > 1)
 				ft_multi_com(get_line, envp);
 			else
 				ft_run_commands(user_comm, get_line, envp);

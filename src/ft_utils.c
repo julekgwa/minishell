@@ -12,12 +12,6 @@
 
 #include "minishell.h"
 
-void freesplit( char **split )
-{
-    free( split[ 0 ] );
-    free( split );
-}
-
 char	*ft_rm_quotes(char *s)
 {
 	int	slen;

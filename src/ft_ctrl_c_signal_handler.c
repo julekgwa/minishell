@@ -23,15 +23,23 @@ void	ft_ctrl_c_signal_handler(int signum)
 
 void	ft_print_error(char *cmd, int errorno)
 {
-	ft_putstr("minishell: ");
-	ft_putstr(cmd);
 	if (errorno == 0)
 	{
+		ft_putstr("minishell: ");
+		ft_putstr(cmd);
 		ft_putstr(": command not found...\n");
 	}
 	else if (errorno == 1)
 	{
+		ft_putstr("minishell: ");
+		ft_putstr(cmd);
 		ft_putstr(": Permission denied\n");
+	}
+	else if (errorno == 3)
+	{
+		ft_putstr("cd: ");
+		ft_putstr("no such file or directory: ");
+		ft_putendl(cmd);
 	}
 }
 

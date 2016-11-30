@@ -44,16 +44,3 @@ int		ft_spaces_tabs(char *s)
 	}
 	return (0);
 }
-
-void	freecopy(char **copy)
-{
-	int	i;
-
-	i = 0;
-	while (copy[i])
-	{
-		free(copy[i]);
-		i++;
-	}
-	free(copy);
-}
