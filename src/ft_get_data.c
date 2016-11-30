@@ -72,16 +72,18 @@ char	*ft_more(char **envp, char **split)
 
 void	ft_execute_bin(char **command, char **envp)
 {
-	pid_t		pid;
-	struct stat	sb;
+	pid_t	pid;
+	int		exec;
 
-	if (!(stat(command[0], &sb) == 0 && sb.st_mode & S_IXUSR ? 1 : 0)) {
-		ft_putendl("Not executable bin");
-		return ;
-	}
 	pid = fork();
-	if (pid == 0)
-		execve(command[0], &command[0], envp);
+	if (pid == 0){
+		exec = execve(command[0], &command[0], envp);
+		if (exec == -1)
+		{
+			ft_print_error(command[0], 1);
+			exit(0);
+		}
+	}
 	if (pid > 0)
 		wait(NULL);
 }
@@ -89,19 +91,21 @@ void	ft_execute_bin(char **command, char **envp)
 void	ft_execute(char **envp, char **sp)
 {
 	pid_t	pid;
+	char	*cmd;
 	int		exec;
-	// struct stat	sb;
 
-	if ((access(sp[0], X_OK) == 0)) {
-		ft_putendl("Not executable exec");
-		return ;
-	}
+	cmd = ft_more(envp, sp);
 	pid = fork();
 	if (pid == 0) {
-		exec = execve(ft_more(envp, sp), &sp[0], envp);
+		exec = execve(cmd, &sp[0], envp);
 		if (exec == -1)
-			ft_putendl("Not executable");
+		{
+			ft_print_error(cmd, 1);
+			exit(0);
+		}
 	}
-	if (pid > 0)
+	if (pid > 0){
 		wait(NULL);
+		free(cmd);
+	}
 }

@@ -52,12 +52,14 @@ void	ft_print_env(char **envp)
 		ft_putendl(s);
 }
 
-char	**ft_check_env(char **cmd, char **envp)
+void	ft_check_env(char ***command, char **envp)
 {
 	int		count;
+	char	**cmd;
 	int		i;
 
 	i = 0;
+	cmd = *command;
 	count = ft_array_len(cmd);
 	while (i < count)
 	{
@@ -65,5 +67,6 @@ char	**ft_check_env(char **cmd, char **envp)
 			cmd[i] = ft_get_env(cmd[i], envp);
 		i++;
 	}
-	return (cmd);
+	*command = cmd;
+	// return (cmd);
 }

@@ -72,11 +72,9 @@ char	*ft_first_word(const char *s)
 
 char	*ft_pwd(void)
 {
-	char	wdir[1024];
 	char	*pwd;
 
-	getcwd(wdir, sizeof(wdir));
-	pwd = &wdir[0];
+	pwd = getcwd(NULL, 0);
 	return (pwd);
 }
 

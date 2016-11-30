@@ -60,10 +60,16 @@ int		ft_search_command(char *command)
 
 void	ft_execute_commands(char **command, char *get_line, char **envp)
 {
+	char *dir;
+
 	if (ft_strequ(command[0], "cd"))
 		ft_cd(command, envp);
 	else if (ft_strequ(command[0], "pwd"))
-		ft_putendl(ft_pwd());
+	{
+		dir = ft_pwd();
+		ft_putendl(dir);
+		free(dir);
+	}
 	else if (ft_strequ(command[0], "echo"))
 		ft_echo(get_line, envp);
 	else if (ft_strequ(command[0], "env"))
@@ -84,7 +90,6 @@ void	ft_run_commands(char **user_comm, char *get_line, char **envp)
 
 	sp = ft_strsplit(get_line, ' ');
 	more = NULL;
-	user_comm = ft_check_env(user_comm, envp);
 	if (ft_search_command(user_comm[0]))
 	{
 		if ((pid = fork()) < 0)
@@ -94,6 +99,7 @@ void	ft_run_commands(char **user_comm, char *get_line, char **envp)
 		if (pid > 0)
 		{
 			wait(NULL);
+			freecopy(sp);
 			exit(0);
 		}
 	}
@@ -102,12 +108,12 @@ void	ft_run_commands(char **user_comm, char *get_line, char **envp)
 	else if (ft_is_execute(sp[0]))
 		ft_execute_bin(sp, envp);
 	else
-		ft_print_error(sp[0]);
+		ft_print_error(sp[0], 0);
 	freecopy(sp);
-	freesplit(user_comm);
+	// freesplit(user_comm);
 	if (more)
 		free(more);
-	free(get_line);
+	// free(get_line);
 }
 
 void	prompt(char **commands)
@@ -161,8 +167,8 @@ int		main(int ac, char **av, char **envp)
 				exit(0);
 			}
 			ft_run_commands(user_comm, get_line, envp);
-			// freecopy(user_comm);
-			// free(get_line);
+			freecopy(user_comm);
+			free(get_line);
 		}
 	}
 	return (0);

@@ -17,9 +17,16 @@ void	ft_ctrl_c_signal_handler(int signum)
 	exit(signum);
 }
 
-void	ft_print_error(char *erro)
+void	ft_print_error(char *cmd, int errorno)
 {
 	ft_putstr("minishell: ");
-	ft_putstr(erro);
-	ft_putstr(": command not found...\n");
+	ft_putstr(cmd);
+	if (errorno == 0)
+	{
+		ft_putstr(": command not found...\n");
+	}
+	else if (errorno == 1)
+	{
+		ft_putstr(": Permission denied\n");
+	}
 }
