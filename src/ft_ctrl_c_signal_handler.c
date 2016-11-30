@@ -14,9 +14,8 @@
 
 void	ft_ctrl_c_signal_handler(int signum)
 {
-	ft_putstr("Control + c");
+	ft_putstr("\n");
 	(void)signum;
-	// exit(signum);
 }
 
 void	ft_print_error(char *cmd, int errorno)
