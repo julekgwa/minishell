@@ -67,7 +67,14 @@ void ft_execute_commands(char **command, char *get_line, char **envp)
 {
     char *dir;
 
-    if (ft_strequ(command[0], "cd"))
+    if (ft_strequ(command[0], "exit"))
+    {
+    	freecopy(command);
+    	// freecopy(envp);
+    	free(get_line);
+    	exit(0);
+    }
+    else if (ft_strequ(command[0], "cd"))
         ft_cd(command, envp);
     else if (ft_strequ(command[0], "pwd"))
     {
@@ -169,7 +176,10 @@ int main(int ac, char **av, char **envp)
                 free(get_line);
                 exit(0);
             }
-            ft_run_commands(user_comm, get_line, envp);
+            if (ft_contains(get_line, ';'))
+            	ft_multi_com(get_line, envp);
+            else
+            	ft_run_commands(user_comm, get_line, envp_copy);
             freecopy(user_comm);
             free(get_line);
         }
