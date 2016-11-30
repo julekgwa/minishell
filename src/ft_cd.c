@@ -71,9 +71,9 @@ char	*ft_clean_str(char *s)
 	return (s);
 }
 
-void	ft_modpwd(int f, char *oldpwd, char **envp)
+void	ft_modpwd(int flag, char *oldpwd, char **envp)
 {
-	if ((f = 1))
+	if ((flag = 1))
 	{
 		ft_setenv("OLDPWD", oldpwd, 1, envp);
 		ft_setenv("PWD", getcwd(oldpwd, 1024), 1, envp);
