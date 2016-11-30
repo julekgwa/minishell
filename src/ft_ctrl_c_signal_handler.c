@@ -15,6 +15,9 @@
 void	ft_ctrl_c_signal_handler(int signum)
 {
 	ft_putstr("\n");
+	ft_putstr(GRN);
+    ft_putstr("$> ");
+    ft_putstr(RESET);
 	(void)signum;
 }
 
