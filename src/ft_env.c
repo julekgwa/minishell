@@ -6,7 +6,7 @@
 /*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 10:23:21 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/07/10 10:28:07 by julekgwa         ###   ########.fr       */
+/*   Updated: 2016/12/01 08:42:03 by julekgwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		ft_putenv(char *str, char **envp)
 
 int		ft_setenv(const char *name, const char *val, int ovride, char **envp)
 {
-	char *es;
-	int	i;
+	char	*es;
+	int		i;
 
 	if (name == NULL || name[0] == '\0' || ft_strchr(name, '=') != NULL ||
 			val == NULL)

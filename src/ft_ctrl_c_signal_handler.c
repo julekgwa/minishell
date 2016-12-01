@@ -6,7 +6,7 @@
 /*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 10:12:50 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/07/14 10:45:04 by julekgwa         ###   ########.fr       */
+/*   Updated: 2016/12/01 08:47:26 by julekgwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_ctrl_c_signal_handler(int signum)
 {
 	ft_putstr("\n");
 	ft_putstr(GRN);
-    ft_putstr("$> ");
-    ft_putstr(RESET);
+	ft_putstr("$> ");
+	ft_putstr(RESET);
 	(void)signum;
 }
 
@@ -60,7 +60,7 @@ int		ft_contains(char *str, char c)
 void	ft_multi_com(char *get_line, char **envp)
 {
 	char	**tmp_com;
-	char 	**split_com;
+	char	**split_com;
 	int		i;
 
 	split_com = ft_strsplit(get_line, ';');
@@ -80,10 +80,10 @@ void	ft_multi_com(char *get_line, char **envp)
 char	**envp_cpy(char **envp)
 {
 	char	**copy;
-	int	i;
+	int		i;
 
 	i = 0;
-	copy = (char **) malloc((ft_array_len(envp) + 1) * sizeof (char *));
+	copy = (char **)malloc((ft_array_len(envp) + 1) * sizeof(char *));
 	copy[ft_array_len(envp)] = NULL;
 	if (copy)
 	{

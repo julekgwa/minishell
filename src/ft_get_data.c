@@ -6,7 +6,7 @@
 /*   By: goisetsi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 09:07:29 by goisetsi          #+#    #+#             */
-/*   Updated: 2016/07/14 10:41:00 by julekgwa         ###   ########.fr       */
+/*   Updated: 2016/12/01 08:45:06 by julekgwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	*ft_more(char **envp, char **split)
 	{
 		join = ft_strjoin(new[i], "/");
 		str = ft_strjoin(join, split[0]);
-		if (access(str, F_OK) == 0) {
+		if (access(str, F_OK) == 0)
+		{
 			free(join);
 			freecopy(new);
 			return (str);
@@ -74,7 +75,8 @@ void	ft_execute_bin(char **command, char **envp)
 	int		exec;
 
 	pid = fork();
-	if (pid == 0){
+	if (pid == 0)
+	{
 		exec = execve(command[0], &command[0], envp);
 		if (exec == -1)
 		{
@@ -94,7 +96,8 @@ void	ft_execute(char **envp, char **sp)
 
 	cmd = ft_more(envp, sp);
 	pid = fork();
-	if (pid == 0) {
+	if (pid == 0)
+	{
 		exec = execve(cmd, &sp[0], envp);
 		if (exec == -1)
 		{
@@ -102,7 +105,8 @@ void	ft_execute(char **envp, char **sp)
 			exit(0);
 		}
 	}
-	if (pid > 0){
+	if (pid > 0)
+	{
 		wait(NULL);
 		free(cmd);
 	}

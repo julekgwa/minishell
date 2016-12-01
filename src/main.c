@@ -6,7 +6,7 @@
 /*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 10:31:17 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/07/10 17:08:31 by julekgwa         ###   ########.fr       */
+/*   Updated: 2016/12/01 08:51:08 by julekgwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,31 @@ void	shl_loop(char *get_line, char **envp)
 {
 	char **user_comm;
 
-	while (42)
+	prompt(&get_line);
+	if (!ft_strequ(get_line, "") && ft_spaces_tabs(get_line))
 	{
-		prompt(&get_line);
-		if (!ft_strequ(get_line, "") && ft_spaces_tabs(get_line))
+		user_comm = ft_strsplit(get_line, ' ');
+		if (ft_strequ(user_comm[0], "exit"))
 		{
-			user_comm = ft_strsplit(get_line, ' ');
-			if (ft_strequ(user_comm[0], "exit"))
-			{
-				freecopy(user_comm);
-				freecopy(envp);
-				free(get_line);
-				exit(0);
-			}
-			if (ft_contains(get_line, ';') && ft_strlen(get_line) > 1)
-				ft_multi_com(get_line, envp);
-			else
-				ft_run_commands(user_comm, get_line, envp);
 			freecopy(user_comm);
+			freecopy(envp);
 			free(get_line);
+			exit(0);
 		}
+		if (ft_contains(get_line, ';') && ft_strlen(get_line) > 1)
+			ft_multi_com(get_line, envp);
+		else
+			ft_run_commands(user_comm, get_line, envp);
+		freecopy(user_comm);
+		free(get_line);
 	}
 }
 
 int		ft_search_command(char *command)
 {
-	static	char *comm_list = "echo pwd cd setenv unsetenv env exit clear";
-	char	**comm_split;
-	int		i;
+	static char	*comm_list = "echo pwd cd setenv unsetenv env exit clear";
+	char		**comm_split;
+	int			i;
 
 	comm_split = ft_strsplit(comm_list, ' ');
 	i = 0;
@@ -118,8 +115,11 @@ int		main(int ac, char **av, char **envp)
 	get_line = ft_strcat(get_line, av[0]);
 	free(get_line);
 	signal(SIGINT, ft_ctrl_c_signal_handler);
-	(void) ac;
-	(void) av;
-	shl_loop(get_line, envp_copy);
+	(void)ac;
+	(void)av;
+	while (42)
+	{
+		shl_loop(get_line, envp_copy);
+	}
 	return (0);
 }
