@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: goisetsi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/04 09:07:29 by goisetsi          #+#    #+#             */
-/*   Updated: 2016/12/01 08:45:06 by julekgwa         ###   ########.fr       */
+/*   Created: 2016/12/15 16:14:40 by goisetsi          #+#    #+#             */
+/*   Updated: 2016/12/15 16:26:53 by goisetsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	ft_execute_bin(char **command, char **envp)
 		}
 	}
 	if (pid > 0)
+	{
 		wait(NULL);
+	}
 }
 
 void	ft_execute(char **envp, char **sp)

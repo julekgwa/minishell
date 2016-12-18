@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: goisetsi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/10 10:23:21 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/12/01 08:42:03 by julekgwa         ###   ########.fr       */
+/*   Created: 2016/12/13 18:39:49 by goisetsi          #+#    #+#             */
+/*   Updated: 2016/12/13 18:39:55 by goisetsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		ft_setenv(const char *name, const char *val, int ovride, char **envp)
 		return (0);
 	ft_unsetenv(name, envp);
 	es = ft_memalloc(ft_strlen(name) + ft_strlen(val) + 2);
+	ft_bzero(es, ft_strlen(name) + ft_strlen(val) + 2);
 	if (es == NULL)
 		return (-1);
 	ft_strcpy(es, name);
@@ -60,11 +61,14 @@ int		ft_unsetenv(const char *name, char **envp)
 	char	**r;
 	char	**w;
 	size_t	len;
+	int		count[2];
 
 	if (name == NULL || name[0] == '\0' || ft_strchr(name, '=') != NULL)
 		return (-1);
 	r = envp;
 	w = envp;
+	count[0] = 0;
+	count[1] = 0;
 	len = ft_strlen(name);
 	while (*r)
 	{
@@ -72,6 +76,8 @@ int		ft_unsetenv(const char *name, char **envp)
 			*w++ = *r;
 		r++;
 	}
+	if (w)
+	 freecopy(w);
 	*w = NULL;
 	return (0);
 }

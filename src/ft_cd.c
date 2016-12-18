@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: goisetsi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/10 10:02:31 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/12/01 08:38:38 by julekgwa         ###   ########.fr       */
+/*   Created: 2016/12/13 18:39:49 by goisetsi          #+#    #+#             */
+/*   Updated: 2016/12/13 18:39:55 by goisetsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	ft_cd(char **directory, char **envp)
 		if ((dirflag = chdir(dir) == -1))
 		{
 			ft_print_error(dir, 3);
+			free(dir);
+			free(oldpwd);
 			return ;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: goisetsi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/10 09:50:53 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/07/10 09:57:23 by julekgwa         ###   ########.fr       */
+/*   Created: 2016/12/13 18:39:49 by goisetsi          #+#    #+#             */
+/*   Updated: 2016/12/13 18:39:55 by goisetsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,28 @@ int		ft_check_options(char opt, const char *options)
 void	ft_echo(char *echo, char **envp)
 {
 	char	**split;
-	int		count;
+	int		count[2];
 
 	split = ft_strsplit(echo, ' ');
-	count = ft_array_len(split);
-	if (count == 0)
+	count[0] = ft_array_len(split);
+	count[1] = 0;
+	if (count[0] == 0)
 		ft_putchar('\n');
 	else
 	{
 		if (!ft_start_with(split[1], '-'))
 		{
-			split++;
-			while (*split)
+			count[1]++;
+			while (split[count[1]])
 			{
-				if (ft_start_with(*split, '$'))
-					ft_putstr_char(ft_rm_quotes(ft_get_env(*split, envp)), ' ');
+				if (ft_start_with(split[count[1]], '$'))
+					ft_putstr_char(ft_rm_quotes(ft_get_env(split[count[1]], envp)), ' ');
 				else
-					ft_putstr_char(ft_rm_quotes(*split), ' ');
-				split++;
+					ft_putstr_char(ft_rm_quotes(split[count[1]]), ' ');
+				count[1]++;
 			}
 			ft_putchar('\n');
 		}
 	}
+	freecopy(split);
 }

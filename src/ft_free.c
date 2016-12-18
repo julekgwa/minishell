@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julekgwa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: goisetsi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 08:34:33 by julekgwa          #+#    #+#             */
-/*   Updated: 2016/12/01 08:37:07 by julekgwa         ###   ########.fr       */
+/*   Created: 2016/12/13 18:39:49 by goisetsi          #+#    #+#             */
+/*   Updated: 2016/12/13 18:39:55 by goisetsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ void	freesplit(char **split)
 	free(split[0]);
 	free(split);
 }
+
+void	free2d(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		if (split[i])
+			free(split[i]);
+		i++;
+	}
+	if (split)
+		free(split);
+}
+
 
 void	ft_free_str(char *str, char *join)
 {
